@@ -3,6 +3,9 @@ import mapboxgl from "mapbox-gl";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { setRef, makeStyles } from "@material-ui/core";
 
+// eslint-disable-next-line
+(mapboxgl as any).workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+
 mapboxgl.accessToken = "pk.eyJ1IjoicGFsaWtrIiwiYSI6ImNrbTliODB6OTA5OGIydnFsdmozOXNoM3kifQ.lIwSnEiG4haqzQjfkuN9og";
 
 const useStyles = makeStyles({

@@ -10,6 +10,7 @@ function App() {
     1974,
     1987,
     1995,
+    2011,
     2020
   ];
   const [year, setYear] = useState(years[years.length - 1]);
