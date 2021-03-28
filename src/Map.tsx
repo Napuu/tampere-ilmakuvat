@@ -68,7 +68,7 @@ export function Map ({year}: Props) {
                     "type": "raster",
                     "scheme": "tms",
                     "tiles": [
-                        `http://192.168.1.184:20001/tampere_${year}/{z}/{x}/{y}.png`
+                      `http://kartalla.dev/tampere/tiles/tampere_${year}/{z}/{x}/{y}.png`
                     ],
                     "tileSize": 256
                 });
