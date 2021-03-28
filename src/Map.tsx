@@ -1,25 +1,35 @@
-import React, { useEffect, useState, useRef } from "react";
-import "./Map.css";
+import { useEffect, useState, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { setRef } from "@material-ui/core";
+import { setRef, makeStyles } from "@material-ui/core";
 
 mapboxgl.accessToken = "pk.eyJ1IjoicGFsaWtrIiwiYSI6ImNrbTliODB6OTA5OGIydnFsdmozOXNoM3kifQ.lIwSnEiG4haqzQjfkuN9og";
+
+const useStyles = makeStyles({
+    map: {
+        position: "absolute",
+        top: 0,
+        bottom: 0,
+        width: "100%"
+    }
+})
 
 interface Props {
     year: number;
 }
 
 export function Map ({year}: Props) {
-    const mapRef = useRef();
+    const classes = useStyles();
+    const mapRef = useRef<mapboxgl.Map>();
 
     const [mapLoaded, setMapLoaded] = useState(false);
     useEffect(() => {
         const map = new mapboxgl.Map({
             container: "mapContainer",
-            style: "mapbox://styles/mapbox/satellite-streets-v11",
+            style: "mapbox://styles/mapbox/streets-v11",
             center: { lng: 23.759083900356823, lat: 61.49589108094602 },
             zoom: 12,
+            maxZoom: 17
         });
         setRef(mapRef, map);
 
@@ -29,7 +39,7 @@ export function Map ({year}: Props) {
 
         map.on("movestart", () => {
             let tampereLayers = ((map as any).getStyle().layers)
-                .filter((l: mapboxgl.Layer) => (l.id as string).startsWith("tampere"))
+                                    .filter((l: mapboxgl.Layer) => (l.id as string).startsWith("tampere"))
             tampereLayers = tampereLayers.slice(0, tampereLayers.length - 2);
             // remove all but current visible layer when panning around to
             // keep performance at an acceptable level
@@ -41,12 +51,13 @@ export function Map ({year}: Props) {
         })
         return () => map.remove();
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
 
     useEffect(() => {
         if (mapRef !== undefined && mapLoaded) {
-            const map: mapboxgl.Map = (mapRef as any).current;
+            const map: mapboxgl.Map = mapRef.current as mapboxgl.Map;
             const layer = map.getLayer("tampere_" + year);
             const src = map.getSource("tampere_" + year);
             if (!src) {
@@ -63,7 +74,7 @@ export function Map ({year}: Props) {
                 map.addLayer({
                     type: "raster",
                     id: "tampere_" + year,
-                    source: "tampere_" + year
+                    source: "tampere_" + year,
                 });
             }
 
@@ -82,6 +93,6 @@ export function Map ({year}: Props) {
     }, [year, mapRef, mapLoaded]);
 
     return (
-        <div id="mapContainer" />
+        <div id="mapContainer" className={classes.map} />
     )
 }

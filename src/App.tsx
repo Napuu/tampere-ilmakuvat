@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-import './App.css';
 import { Map } from './Map';
 import { YearSelector } from './YearSelector';
 
 function App() {
   const years = [
-      1946,
-      1956,
-      1966,
-      1974,
-      1987,
-      1995,
-      2020
+    1946,
+    1956,
+    1966,
+    1974,
+    1987,
+    1995,
+    2020
   ];
   const [year, setYear] = useState(years[years.length - 1]);
   return (
@@ -19,10 +18,9 @@ function App() {
       <YearSelector
         years={years}
         defaultYear={years[years.length - 1]}
-        updateLayer={(a) => setYear(a)} />
+      updateLayer={(a) => setYear(a)} />
       <Map year={year}/>
     </>
-
   );
 }
 
