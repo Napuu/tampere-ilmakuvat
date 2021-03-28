@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { Map } from './Map';
+import { YearSelector } from './YearSelector';
 
 function App() {
+  const years = [
+      1946,
+      1956,
+      1966,
+      1974,
+      1987,
+      1995,
+      2020
+  ];
+  const [year, setYear] = useState(years[years.length - 1]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <YearSelector
+        years={years}
+        defaultYear={years[years.length - 1]}
+        updateLayer={(a) => setYear(a)} />
+      <Map year={year}/>
+    </>
+
   );
 }
 
