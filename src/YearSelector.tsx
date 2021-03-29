@@ -1,14 +1,21 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { Slider } from '@material-ui/core';
+import { Slider, Box } from '@material-ui/core';
 
 const useStyles = makeStyles({
     container: {
         background: "white",
         zIndex: 100,
         position: "absolute",
-        width: "800px",
-        height: "100px",
-        padding: "20px"
+        width: "calc(100% - 60px)",
+        padding: "20px",
+        margin: "10px",
+        maxWidth: "500px",
+        borderRadius: "2px"
+    },
+    markLabel: {
+        borderRadius: "3px",
+        padding: "1px",
+        fontSize: "small"
     }
 })
 
@@ -27,9 +34,11 @@ export function YearSelector({updateLayer, defaultYear, years}: Props) {
         };
     });
     return (
-        <div className={classes.container}>
+        <Box className={classes.container}>
             <Slider
+                classes={{markLabel: classes.markLabel}}
                 step={null}
+                track={false}
                 marks={marks}
                 defaultValue={defaultYear}
                 min={years[0]}
@@ -38,6 +47,6 @@ export function YearSelector({updateLayer, defaultYear, years}: Props) {
                     updateLayer(newValue as number);
                 }}
             />
-        </div>
+        </Box>
     )
 }
