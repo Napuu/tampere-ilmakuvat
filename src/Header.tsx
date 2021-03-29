@@ -16,8 +16,8 @@ const useStyles = makeStyles({
     },
     infoIcon: {
         position: "absolute",
-        top: "70px",
-        left: "12px",
+        top: "82px",
+        left: "20px",
         zIndex: 100,
         backgroundColor: "black",
         borderRadius: "15px",
@@ -28,7 +28,7 @@ const useStyles = makeStyles({
     },
     infoBox: {
         position: "absolute",
-        top: "88px",
+        top: "99px",
         zIndex: 100,
         background: "white",
         paddingLeft: "20px",
@@ -59,7 +59,7 @@ export function Header({children}: Props) {
             </IconButton>
             {infoVisible &&
                 <Box className={classes.infoBox}>
-                    <IconButton style={{position: "absolute", right: "0px"}} onClick={() => {
+                    <IconButton style={{position: "absolute", marginTop: "-10px", marginRight: "-10px", right: "0px"}} onClick={() => {
                         setInfoVisible(false);
                     }}>
                         <CloseIcon />
