@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Map } from './Map';
 import { YearSelector } from './YearSelector';
+import { Header } from './Header';
 
 function App() {
   const years = [
@@ -16,10 +17,12 @@ function App() {
   const [year, setYear] = useState(years[years.length - 1]);
   return (
     <>
-      <YearSelector
-        years={years}
-        defaultYear={years[years.length - 1]}
-      updateLayer={(a) => setYear(a)} />
+      <Header>
+        <YearSelector
+          years={years}
+          defaultYear={years[years.length - 1]}
+        updateLayer={(a) => setYear(a)} />
+      </Header>
       <Map year={year}/>
     </>
   );

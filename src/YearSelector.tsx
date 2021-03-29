@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { Slider, Box } from '@material-ui/core';
+import { Slider } from '@material-ui/core';
 
 const useStyles = makeStyles({
     container: {
@@ -34,19 +34,17 @@ export function YearSelector({updateLayer, defaultYear, years}: Props) {
         };
     });
     return (
-        <Box className={classes.container}>
-            <Slider
-                classes={{markLabel: classes.markLabel}}
-                step={null}
-                track={false}
-                marks={marks}
-                defaultValue={defaultYear}
-                min={years[0]}
-                max={years[years.length - 1]}
-                onChange={(_ev, newValue) => {
-                    updateLayer(newValue as number);
-                }}
-            />
-        </Box>
+        <Slider
+            classes={{markLabel: classes.markLabel}}
+            step={null}
+            track={false}
+            marks={marks}
+            defaultValue={defaultYear}
+            min={years[0]}
+            max={years[years.length - 1]}
+            onChange={(_ev, newValue) => {
+                updateLayer(newValue as number);
+            }}
+        />
     )
 }
