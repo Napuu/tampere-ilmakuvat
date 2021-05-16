@@ -1,5 +1,6 @@
-FROM fermium:slim
+FROM node:fermium-slim
 WORKDIR /app
 COPY . .
-RUN npm i && PUBLIC_URL=https://kartalla.dev/tampere/ npm run build
+RUN npm i 
+CMD PUBLIC_URL=https://kartalla.dev/tampere/ npm run build
 
